@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <!-- match_parent will  make the text as wide as the linear layout -->
+    <!-- wrap_content will make the element as big as it needs to be
+    to contain stuff inside of it -->
+    <EditText
+        android:id="@+id/et_todo_entry"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:hint="Add a todo" />
+
+    <Button 
+        android:id="@+id/btn_add_todo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit todo" 
+        android:layout_marginHorizontal="4dp" />
+
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height = "wrap_content">
+        <TextView
+        android:id="@+id/tv_todo_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="22sp"
+        android:text="Hello World!" />
+    </ScrollView>
+    
+
+
+
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
