@@ -1,6 +1,10 @@
 package edu.oregonstate.cs492.basictodos
 
 import android.os.Bundle
+import android.text.TextUtils
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,15 +23,15 @@ class MainActivity : AppCompatActivity() {
 
         val todos = mutableListOf<String>()
 
-        val addTodoBtn: Button = findViewById(id = R.id.btn_add_todo)
-        val todoEntryET: EditText = findViewById(id = R.id.et_todo_entry)
-        val todoListTV: TextView = findViewById(id = R.id.tv_todo_list)
+        val addTodoBtn: Button = findViewById(R.id.btn_add_todo)
+        val todoEntryET: EditText = findViewById(R.id.et_todo_entry)
+        val todoListTV: TextView = findViewById(R.id.tv_todo_list)
         // todoListTV.text = "Finish todo app"
 
         addTodoBtn.setOnClickListener { 
             val newTodo = todoEntryET.text.toString()
-            if (!TextUtils.isEmpty(str = newTodo)) {
-                todos.add(index = 0, element = newTodo)
+            if (!TextUtils.isEmpty(newTodo)) {
+                todos.add(0, newTodo)
                 todoListTV.text = todos.joinToString(separator = "\n\n")
                 todoEntryET.setText("")
             }
