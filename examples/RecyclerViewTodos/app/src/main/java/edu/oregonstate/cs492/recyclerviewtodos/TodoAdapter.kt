@@ -13,14 +13,15 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
     override fun getItemCount() = todos.size
 
-    fun addTodo(todo: Todo) {
-        todos.add(0, todo)
+    fun addTodo(todo: Todo, index: Int = 0) {
+        todos.add(index, todo)
         notifyItemInserted(0)
     }
 
-    fun deleteTodoAt(position: Int) {
-        todos.removeAt(position)
+    fun deleteTodoAt(position: Int): Todo {
+        val todo = todos.removeAt(position)
         notifyItemRemoved(position)
+        return todo 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {

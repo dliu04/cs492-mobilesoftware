@@ -6,11 +6,13 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val coordinatorLayout: CoordinatorLayout = findViewById(R.id.main)
+        
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -58,7 +62,18 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.absoluteAdapterPosition
-                adapter.deleteTodoAt(position)
+                val deletedToDo = adapter.deleteTodoAt(position)
+
+                val snackbar = Snackbar.make(
+                    coordinatorLayout,
+                    "Deleted todo",
+                    Snackbar.LENGTH_LONG
+                )
+                // attach stuff to the snackbar
+                snackbar.setAction("UNDO") {
+                    adapter.addTodo(deletedToDo)
+                }
+                snackbar.show()
             }
         }
 
