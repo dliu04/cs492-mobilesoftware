@@ -18,6 +18,11 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
         notifyItemInserted(0)
     }
 
+    fun deleteTodoAt(position: Int) {
+        todos.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.todo_list_item, parent, false)

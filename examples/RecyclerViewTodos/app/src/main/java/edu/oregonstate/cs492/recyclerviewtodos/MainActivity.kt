@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         val addTodoBtn: Button = findViewById(R.id.btn_add_todo)
-//        val todoListTV: TextView = findViewById(R.id.tv_todo_list)
         val todoEntryET: EditText = findViewById(R.id.et_todo_entry)
         val todoListRV: RecyclerView = findViewById(R.id.rv_todo_list)
 
@@ -44,5 +43,25 @@ class MainActivity : AppCompatActivity() {
                 todoEntryET.setText("")
             }
         }
+
+        val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.absoluteAdapterPosition
+                adapter.deleteTodoAt(position)
+            }
+        }
+
+        ItemTouchHelper(itemTouchCallback).attachToRecyclerView(todoListRV)
     }
 }
